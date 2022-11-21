@@ -13,6 +13,9 @@ import streamlit as st
 import subprocess
 
 # 辞書(mecab-ipadic-NEologd)のPathを取得
+
+cmd='git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git'
+cmd='echo yes | mecab-ipadic-neologd/bin/install-mecab-ipadic-neologd -n -a '
 cmd='echo `mecab-config --dicdir`"/mecab-ipadic-neologd"'
 cmd='brew link --overwrite mecab'
 path = (subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True).communicate()[0]).decode('utf-8')
