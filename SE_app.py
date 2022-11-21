@@ -13,6 +13,7 @@ import streamlit as st
 import subprocess
 
 # 辞書(mecab-ipadic-NEologd)のPathを取得
+cmd='brew link --overwrite mecab'
 cmd='echo `mecab-config --dicdir`"/mecab-ipadic-neologd"'
 path = (subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True).communicate()[0]).decode('utf-8')
 
