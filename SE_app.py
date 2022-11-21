@@ -13,15 +13,12 @@ import streamlit as st
 import subprocess
 
 # 辞書(mecab-ipadic-NEologd)のPathを取得
-cmd='sudo cp /etc/mecabrc /usr/local/etc/'                                 
-cmd='git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git'
 cmd='echo yes | mecab-ipadic-neologd/bin/install-mecab-ipadic-neologd -n -a '
 cmd='echo `mecab-config --dicdir`"/mecab-ipadic-neologd"'
 cmd='brew link --overwrite mecab'
-path = (subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True).communicate()[0]).decode('utf-8')
 
 # MeCabの事前設定（辞書ファイルをオプションで指定）
-tagger = MeCab.Tagger("-d {0}".format(path))
+tagger = MeCab.Tagger('-d /usr/local/lib/mecab/dic/mecab-ipadic-neologd')
 
 # 分かち書き用tokenizer
 tokenizer = BertJapaneseTokenizer.from_pretrained('cl-tohoku/bert-base-japanese-whole-word-masking')
