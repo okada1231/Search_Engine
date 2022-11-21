@@ -10,3 +10,4 @@ tokenizers
 torch
 transformers
 urllib3
+subprocess
