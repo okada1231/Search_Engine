@@ -13,7 +13,7 @@ import streamlit as st
 import subprocess
 
 # 辞書(mecab-ipadic-NEologd)のPathを取得
-
+cmd='sudo cp /etc/mecabrc /usr/local/etc/'                                 
 cmd='git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git'
 cmd='echo yes | mecab-ipadic-neologd/bin/install-mecab-ipadic-neologd -n -a '
 cmd='echo `mecab-config --dicdir`"/mecab-ipadic-neologd"'
