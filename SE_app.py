@@ -9,8 +9,16 @@ import re
 import copy
 import streamlit as st
 
+# パスを取得するのに必要なライブラリをインポート
+import subprocess
 
-tagger = MeCab.Tagger('-d /usr/local/lib/mecab/dic/mecab-ipadic-neologd')
+# 辞書(mecab-ipadic-NEologd)のPathを取得
+cmd='echo `mecab-config --dicdir`"/mecab-ipadic-neologd"'
+path = (subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True).communicate()[0]).decode('utf-8')
+
+# MeCabの事前設定（辞書ファイルをオプションで指定）
+tagger = MeCab.Tagger("-d {0}".format(path))
+
 # 分かち書き用tokenizer
 tokenizer = BertJapaneseTokenizer.from_pretrained('cl-tohoku/bert-base-japanese-whole-word-masking')
 
