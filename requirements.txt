@@ -1,6 +1,5 @@
 fugashi
 ipadic
-mecab-python3
 numpy
 pandas
 sentencepiece
