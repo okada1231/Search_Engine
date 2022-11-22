@@ -1,4 +1,0 @@
-tcl-tk
-xz
-swing
-mecab
