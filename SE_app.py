@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 import torch
-import fugashi
 from transformers import BertModel
 from transformers import BertJapaneseTokenizer
 import re
