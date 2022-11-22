@@ -1,11 +1,7 @@
-fugashi
-ipadic
 numpy
 pandas
-sentencepiece
-setuptools
 streamlit
 tokenizers
 torch
 transformers
-urllib3
+
