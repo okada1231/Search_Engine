@@ -2,6 +2,7 @@ numpy
 pandas
 sentencepiece
 fugashi
+ipadic
 streamlit
 tokenizers
 torch
