@@ -24,17 +24,12 @@ model = BertModel.from_pretrained('cl-tohoku/bert-base-japanese-whole-word-maski
 # 東北大学_日本語版の設定を確認
 config_japanese = BertConfig.from_pretrained('cl-tohoku/bert-base-japanese-whole-word-masking')
 
-
-def st_display_table(df: pd.DataFrame):
-
-    # データフレームを表示
-    st.subheader('データの確認')
-    st.table(df)
-
+#　類似度の取得
 def result():
     search = st.session_state.search
     st.write('検索結果')
     if search == '':
+        #　何も入力されていない場合に表示
         st.write("結果なし")
     
     else:
@@ -67,7 +62,7 @@ def result():
 def main():
     st.title("検索システム（仮)")
 
-    uploaded_file = st.sidebar.file_uploader("訓練用データのアップロード", type='csv')
+    uploaded_file = st.sidebar.file_uploader("データのアップロード", type='csv')
 
 
     if uploaded_file is not None:
@@ -93,6 +88,7 @@ def main():
             for index, data in df_data.iterrows():
                 data_list.append(data['質問事項'] + data['回答'])
             
+            # データリストの不要な文字を置き換え
             for i in range(len(data_list)):
                 data_list[i] = data_list[i].replace('\r','')
                 data_list[i] = data_list[i].replace('\n','')
@@ -100,7 +96,6 @@ def main():
                 data_list[i] = data_list[i].replace('、','')
                 data_list[i] = data_list[i].replace('・','')
                 data_list[i] = data_list[i].replace('。','')
-
 
             # 表示用テキストリスト
             text_list = []
