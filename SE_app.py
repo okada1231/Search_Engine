@@ -1,12 +1,15 @@
+import MeCab
 import pandas as pd
 import numpy as np
 import torch
+import fugashi
 from transformers import BertModel
 from transformers import BertJapaneseTokenizer
+from transformers import BertConfig
 import re
+import string
 import copy
 import streamlit as st
-
 
 # 分かち書き用tokenizer
 tokenizer = BertJapaneseTokenizer.from_pretrained('cl-tohoku/bert-base-japanese-whole-word-masking')
@@ -16,8 +19,15 @@ model = BertModel.from_pretrained('cl-tohoku/bert-base-japanese-whole-word-maski
 # print(model) 
 
 # 東北大学_日本語版の設定を確認
-from transformers import BertConfig
 config_japanese = BertConfig.from_pretrained('cl-tohoku/bert-base-japanese-whole-word-masking')
+
+# st.session_state.tokenizer = copy.deepcopy(tokenizer)    
+# st.session_state.model = copy.deepcopy(model)
+# st.session_sate.config = copy.deepcopy(config_japanese)
+
+#tokenizer = copy.deepcopy(st.session_state.tokenizer)
+#model = copy.deepcopy(st.session_state.model)
+#config_japanese = copy.deepcopy(st.session_state.config)
 
 def st_display_table(df: pd.DataFrame):
 
@@ -32,9 +42,9 @@ def result():
         st.write("結果なし")
     
     else:
-        target_layer = -1
         input_ids_kw = tokenizer.encode(search, return_tensors='pt')
         layers = model(input_ids_kw)
+        target_layer = -1
         layer = layers[0]
         word_vec_kw = layer[0][target_layer]
 
@@ -61,7 +71,7 @@ def main():
     st.title("検索システム（仮)")
 
     uploaded_file = st.sidebar.file_uploader("訓練用データのアップロード", type='csv')
-    
+
 
     if uploaded_file is not None:
 
@@ -85,18 +95,27 @@ def main():
             data_list = []
             for index, data in df_data.iterrows():
                 data_list.append(data['質問事項'] + data['回答'])
+            
+            for i in range(len(data_list)):
+                data_list[i] = data_list[i].replace('\r','')
+                data_list[i] = data_list[i].replace('\n','')
+                data_list[i] = data_list[i].translate(str.maketrans('','', string.punctuation))
+                data_list[i] = data_list[i].replace('、','')
+                data_list[i] = data_list[i].replace('・','')
+                data_list[i] = data_list[i].replace('。','')
+
 
             # 表示用テキストリスト
             text_list = []
             for index, data in df_data.iterrows():
                 text_list.append(data['回答'])
 
-            target_layer = -1
 
             word_vec_list =  []
             for i in range(len(data_list)):
                 input_ids = tokenizer.encode(data_list[i], return_tensors='pt')  # ptはPyTorchの略
                 layers = model(input_ids)
+                target_layer = -1
                 layer = layers[0]
                 word_vec = layer[0][target_layer]
                 word_vec_list.append(word_vec)
