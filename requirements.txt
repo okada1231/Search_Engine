@@ -7,4 +7,4 @@ streamlit
 tokenizers
 torch
 transformers
-
+mecab-python3
