@@ -111,6 +111,10 @@ def main():
             text_list = []
             for index, data in df_data.iterrows():
                 text_list.append(data['回答'])
+                
+            tokenizer = copy.deepcopy(st.session_state.tokenizer)
+            model = copy.deepcopy(st.session_state.model)
+            config_japanese = copy.deepcopy(st.session_state.config)
             
             word_vec_list =  []
             for i in range(len(data_list)):
