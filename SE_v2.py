@@ -11,20 +11,22 @@ import string
 import copy
 import streamlit as st
 
-# 分かち書き用tokenizer
-tokenizer = BertJapaneseTokenizer.from_pretrained('cl-tohoku/bert-base-japanese-whole-word-masking')
+if 'count' not in st.session_state:
+    st.session_state.count = 0
+    # 分かち書き用tokenizer
+    tokenizer = BertJapaneseTokenizer.from_pretrained('cl-tohoku/bert-base-japanese-whole-word-masking')
 
-# BERTの日本語学習済みパラメータのモデルです
-model = BertModel.from_pretrained('cl-tohoku/bert-base-japanese-whole-word-masking')
-# print(model) 
+    # BERTの日本語学習済みパラメータのモデルです
+    model = BertModel.from_pretrained('cl-tohoku/bert-base-japanese-whole-word-masking')
+    # print(model) 
 
-# 東北大学_日本語版の設定を確認
-config_japanese = BertConfig.from_pretrained('cl-tohoku/bert-base-japanese-whole-word-masking')
+    # 東北大学_日本語版の設定を確認
+    config_japanese = BertConfig.from_pretrained('cl-tohoku/bert-base-japanese-whole-word-masking')
 
 
-st.session_state.tokenizer = copy.deepcopy(tokenizer)    
-st.session_state.model = copy.deepcopy(model)
-st.session_state.config = copy.deepcopy(config_japanese)
+    st.session_state.tokenizer = copy.deepcopy(tokenizer)    
+    st.session_state.model = copy.deepcopy(model)
+    st.session_state.config = copy.deepcopy(config_japanese)
 
 def st_display_table(df: pd.DataFrame):
 
