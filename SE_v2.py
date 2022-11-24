@@ -32,32 +32,32 @@ def result():
         #　何も入力されていない場合に表示
         st.write("結果なし")
     
-#     else:
-#         input_ids_kw = tokenizer.encode(search, return_tensors='pt')
-#         layers = model(input_ids_kw)
-#         target_layer = -1
-#         layer = layers[0]
-#         word_vec_kw = layer[0][target_layer]
+    else:
+        input_ids_kw = tokenizer.encode(search, return_tensors='pt')
+        layers = model(input_ids_kw)
+        target_layer = -1
+        layer = layers[0]
+        word_vec_kw = layer[0][target_layer]
         
-#         data_list = copy.deepcopy(st.session_state.dl)
-#         text_list = copy.deepcopy(st.session_state.tl)
-#         word_vec_list = copy.copy(st.session_state.wv)
+        data_list = copy.deepcopy(st.session_state.dl)
+        text_list = copy.deepcopy(st.session_state.tl)
+        word_vec_list = copy.copy(st.session_state.wv)
         
 
-#         # 文章同士のコサイン類似度を求める
-#         cos = torch.nn.CosineSimilarity(dim=0)
-#         cos_sim_list = []
-#         for i in range(len(data_list)):
-#             cos_sim = cos(word_vec_kw, word_vec_list[i])
-#             cos_sim_list.append(cos_sim)
+        # 文章同士のコサイン類似度を求める
+        cos = torch.nn.CosineSimilarity(dim=0)
+        cos_sim_list = []
+        for i in range(len(data_list)):
+            cos_sim = cos(word_vec_kw, word_vec_list[i])
+            cos_sim_list.append(cos_sim)
 
-#         cos_sim_list = list(map(float, cos_sim_list))
-#         result = list(zip(cos_sim_list, text_list))
-#         sort_result = sorted(result, reverse=True)
+        cos_sim_list = list(map(float, cos_sim_list))
+        result = list(zip(cos_sim_list, text_list))
+        sort_result = sorted(result, reverse=True)
 
-#         for cos_sim_list, text_list in sort_result:
-#           st.write('類似度: ' + str(cos_sim_list))
-#           st.write('文章: ' + text_list)
+        for cos_sim_list, text_list in sort_result:
+          st.write('類似度: ' + str(cos_sim_list))
+          st.write('文章: ' + text_list)
 
 def main():
     st.title("検索システム（仮)")
