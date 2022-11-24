@@ -44,6 +44,10 @@ def result():
         layer = layers[0]
         word_vec_kw = layer[0][target_layer]
         
+        data_list = copy.deepcopy(st.session_state.dl)
+        text_list = copy.deepcopy(st.session_state.tl)
+        word_vec_list = copy.copy(st.session_state.wv)
+        
 
         # 文章同士のコサイン類似度を求める
         cos = torch.nn.CosineSimilarity(dim=0)
