@@ -11,14 +11,20 @@ import string
 import copy
 import streamlit as st
 
+# 分かち書き用tokenizer
+tokenizer = BertJapaneseTokenizer.from_pretrained('cl-tohoku/bert-base-japanese-whole-word-masking')
 
-# st.session_state.tokenizer = copy.deepcopy(tokenizer)    
-# st.session_state.model = copy.deepcopy(model)
-# st.session_sate.config = copy.deepcopy(config_japanese)
+# BERTの日本語学習済みパラメータのモデルです
+model = BertModel.from_pretrained('cl-tohoku/bert-base-japanese-whole-word-masking')
+# print(model) 
 
-# tokenizer = copy.deepcopy(st.session_state.tokenizer)
-# model = copy.deepcopy(st.session_state.model)
-# config_japanese = copy.deepcopy(st.session_state.config)
+# 東北大学_日本語版の設定を確認
+config_japanese = BertConfig.from_pretrained('cl-tohoku/bert-base-japanese-whole-word-masking')
+
+
+st.session_state.tokenizer = copy.deepcopy(tokenizer)    
+st.session_state.model = copy.deepcopy(model)
+st.session_state.config = copy.deepcopy(config_japanese)
 
 def st_display_table(df: pd.DataFrame):
 
@@ -39,9 +45,6 @@ def result():
         layer = layers[0]
         word_vec_kw = layer[0][target_layer]
         
-        tokenizer = copy.deepcopy(st.session_state.tokenizer)
-        model = copy.deepcopy(st.session_state.model)
-        config_japanese = copy.deepcopy(st.session_state.config)
         data_list = copy.deepcopy(st.session_state.dl)
         text_list = copy.deepcopy(st.session_state.tl)
         word_vec_list = copy.copy(st.session_state.wv)
@@ -103,16 +106,6 @@ def main():
             text_list = []
             for index, data in df_data.iterrows():
                 text_list.append(data['回答'])
-                
-            # 分かち書き用tokenizer
-            tokenizer = BertJapaneseTokenizer.from_pretrained('cl-tohoku/bert-base-japanese-whole-word-masking')
-
-            # BERTの日本語学習済みパラメータのモデルです
-            model = BertModel.from_pretrained('cl-tohoku/bert-base-japanese-whole-word-masking')
-            # print(model) 
-
-            # 東北大学_日本語版の設定を確認
-            config_japanese = BertConfig.from_pretrained('cl-tohoku/bert-base-japanese-whole-word-masking')
             
             word_vec_list =  []
             for i in range(len(data_list)):
@@ -125,9 +118,9 @@ def main():
 
             # データフレームをセッションステートに退避
             
-            st.session_state.tokenizer = copy.deepcopy(tokenizer)    
-            st.session_state.model = copy.deepcopy(model)
-            st.session_state.config = copy.deepcopy(config_japanese)
+            tokenizer = copy.deepcopy(st.session_state.tokenizer)
+            model = copy.deepcopy(st.session_state.model)
+            config_japanese = copy.deepcopy(st.session_state.config)
             st.session_state.df = copy.deepcopy(df)
             st.session_state.dl = copy.deepcopy(data_list)
             st.session_state.tl = copy.deepcopy(text_list)
