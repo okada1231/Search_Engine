@@ -124,7 +124,7 @@ def main():
                 result()
 
     else:
-        st.subheader('訓練用データをアップロードしてください')
+        st.subheader('データをアップロードしてください')
         
                 
 
