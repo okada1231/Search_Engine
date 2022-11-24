@@ -25,10 +25,6 @@ model = BertModel.from_pretrained('cl-tohoku/bert-base-japanese-whole-word-maski
 config_japanese = BertConfig.from_pretrained('cl-tohoku/bert-base-japanese-whole-word-masking')
 
 
-st.session_state.tokenizer = copy.deepcopy(tokenizer)    
-st.session_state.model = copy.deepcopy(model)
-st.session_state.config = copy.deepcopy(config_japanese)
-
 def st_display_table(df: pd.DataFrame):
 
     # データフレームを表示
@@ -48,12 +44,6 @@ def result():
         layer = layers[0]
         word_vec_kw = layer[0][target_layer]
         
-        tokenizer = copy.deepcopy(st.session_state.tokenizer)
-        model = copy.deepcopy(st.session_state.model)
-        config_japanese = copy.deepcopy(st.session_state.config)
-        data_list = copy.deepcopy(st.session_state.dl)
-        text_list = copy.deepcopy(st.session_state.tl)
-        word_vec_list = copy.copy(st.session_state.wv)
 
         # 文章同士のコサイン類似度を求める
         cos = torch.nn.CosineSimilarity(dim=0)
@@ -112,10 +102,6 @@ def main():
             text_list = []
             for index, data in df_data.iterrows():
                 text_list.append(data['回答'])
-                
-            tokenizer = copy.deepcopy(st.session_state.tokenizer)
-            model = copy.deepcopy(st.session_state.model)
-            config_japanese = copy.deepcopy(st.session_state.config)
             
             word_vec_list =  []
             for i in range(len(data_list)):
