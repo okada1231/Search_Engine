@@ -135,6 +135,5 @@ def main():
         st.subheader('訓練用データをアップロードしてください')
         
                 
-
 if __name__ == "__main__":
     main()
