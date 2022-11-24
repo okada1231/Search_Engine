@@ -127,7 +127,7 @@ def main():
             
             st.session_state.tokenizer = copy.deepcopy(tokenizer)    
             st.session_state.model = copy.deepcopy(model)
-            st.session_sate.config = copy.deepcopy(config_japanese)
+            st.session_state.config = copy.deepcopy(config_japanese)
             st.session_state.df = copy.deepcopy(df)
             st.session_state.dl = copy.deepcopy(data_list)
             st.session_state.tl = copy.deepcopy(text_list)
