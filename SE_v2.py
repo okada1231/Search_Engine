@@ -45,6 +45,9 @@ def result():
         layer = layers[0]
         word_vec_kw = layer[0][target_layer]
         
+        tokenizer = copy.deepcopy(st.session_state.tokenizer)
+        model = copy.deepcopy(st.session_state.model)
+        config_japanese = copy.deepcopy(st.session_state.config)
         data_list = copy.deepcopy(st.session_state.dl)
         text_list = copy.deepcopy(st.session_state.tl)
         word_vec_list = copy.copy(st.session_state.wv)
@@ -118,9 +121,6 @@ def main():
 
             # データフレームをセッションステートに退避
             
-            tokenizer = copy.deepcopy(st.session_state.tokenizer)
-            model = copy.deepcopy(st.session_state.model)
-            config_japanese = copy.deepcopy(st.session_state.config)
             st.session_state.df = copy.deepcopy(df)
             st.session_state.dl = copy.deepcopy(data_list)
             st.session_state.tl = copy.deepcopy(text_list)
