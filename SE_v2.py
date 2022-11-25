@@ -51,13 +51,13 @@ def result():
             cos_sim = cos(word_vec_kw, word_vec_list[i])
             cos_sim_list.append(cos_sim)
 
-        cos_sim_list = list(map(float, cos_sim_list))
-        result = list(zip(cos_sim_list, text_list))
-        sort_result = sorted(result, reverse=True)
+#         cos_sim_list = list(map(float, cos_sim_list))
+#         result = list(zip(cos_sim_list, text_list))
+#         sort_result = sorted(result, reverse=True)
 
-        for cos_sim_list, text_list in sort_result:
-          st.write('類似度: ' + str(cos_sim_list))
-          st.write('文章: ' + text_list)
+#         for cos_sim_list, text_list in sort_result:
+#           st.write('類似度: ' + str(cos_sim_list))
+#           st.write('文章: ' + text_list)
 
 def main():
     st.title("検索システム（仮)")
