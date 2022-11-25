@@ -33,11 +33,11 @@ def result():
         st.write("結果なし")
     
     else:
-        input_ids_kw = tokenizer.encode(search, return_tensors='pt')
-        layers = model(input_ids_kw)
-        target_layer = -1
-        layer = layers[0]
-        word_vec_kw = layer[0][target_layer]
+#         input_ids_kw = tokenizer.encode(search, return_tensors='pt')
+#         layers = model(input_ids_kw)
+#         target_layer = -1
+#         layer = layers[0]
+#         word_vec_kw = layer[0][target_layer]
         
 #         data_list = copy.deepcopy(st.session_state.dl)
 #         text_list = copy.deepcopy(st.session_state.tl)
