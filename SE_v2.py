@@ -32,7 +32,7 @@ def result():
         #　何も入力されていない場合に表示
         st.write("結果なし")
     
-    else:
+#     else:
 #         input_ids_kw = tokenizer.encode(search, return_tensors='pt')
 #         layers = model(input_ids_kw)
 #         target_layer = -1
