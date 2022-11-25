@@ -11,8 +11,8 @@ import string
 import copy
 import streamlit as st
 
-from transformers import logging
-logging.set_verbosity_error()
+# from transformers import logging
+# logging.set_verbosity_error()
 
 # 分かち書き用tokenizer
 tokenizer = BertJapaneseTokenizer.from_pretrained('cl-tohoku/bert-base-japanese-whole-word-masking')
@@ -39,9 +39,9 @@ def result():
         layer = layers[0]
         word_vec_kw = layer[0][target_layer]
         
-        data_list = copy.deepcopy(st.session_state.dl)
-        text_list = copy.deepcopy(st.session_state.tl)
-        word_vec_list = copy.copy(st.session_state.wv)
+#         data_list = copy.deepcopy(st.session_state.dl)
+#         text_list = copy.deepcopy(st.session_state.tl)
+#         word_vec_list = copy.copy(st.session_state.wv)
         
 
         # 文章同士のコサイン類似度を求める
