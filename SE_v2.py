@@ -45,11 +45,11 @@ def result():
         
 
         # 文章同士のコサイン類似度を求める
-        cos = torch.nn.CosineSimilarity(dim=0)
-        cos_sim_list = []
-        for i in range(len(data_list)):
-            cos_sim = cos(word_vec_kw, word_vec_list[i])
-            cos_sim_list.append(cos_sim)
+#         cos = torch.nn.CosineSimilarity(dim=0)
+#         cos_sim_list = []
+#         for i in range(len(data_list)):
+#             cos_sim = cos(word_vec_kw, word_vec_list[i])
+#             cos_sim_list.append(cos_sim)
 
 #         cos_sim_list = list(map(float, cos_sim_list))
 #         result = list(zip(cos_sim_list, text_list))
